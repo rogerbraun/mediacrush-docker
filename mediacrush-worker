@@ -1,0 +1,3 @@
+#!/bin/bash
+cd /home/app/mediacrush
+celery worker -A mediacrush -Q celery,priority

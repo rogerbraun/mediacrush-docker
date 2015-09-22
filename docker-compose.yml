@@ -1,4 +1,6 @@
 mediacrush:
   build: .
   ports: 
-    - "3000:80"
+    - "81:80"
+  volumes:
+    - "/home/docker-data/mediacrush/storage:/home/app/mediacrush/storage"

@@ -26,6 +26,9 @@ RUN rm /etc/nginx/sites-enabled/default
 
 RUN python compile_static.py
 ADD passenger_wsgi.py /home/app/mediacrush/passenger_wsgi.py
-RUN cp config.ini.sample config.ini
 RUN mkdir storage
 RUN chown -R app:app storage
+
+ADD mediacrush-worker /usr/bin/mediacrush-worker
+RUN mkdir /etc/service/mediacrush-worker
+ADD mediacrush-worker.sh /etc/service/mediacrush-worker/run
