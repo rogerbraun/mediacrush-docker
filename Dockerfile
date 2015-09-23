@@ -21,9 +21,6 @@ ADD MediaCrush /home/app/mediacrush
 WORKDIR /home/app/mediacrush
 RUN pip install -r requirements.txt
 
-ADD mediacrush.conf /etc/nginx/sites-enabled/mediacrush.conf
-RUN rm /etc/nginx/sites-enabled/default
-
 RUN python compile_static.py
 ADD passenger_wsgi.py /home/app/mediacrush/passenger_wsgi.py
 RUN mkdir storage
@@ -32,3 +29,8 @@ RUN chown -R app:app storage
 ADD mediacrush-worker /usr/bin/mediacrush-worker
 RUN mkdir /etc/service/mediacrush-worker
 ADD mediacrush-worker.sh /etc/service/mediacrush-worker/run
+
+ADD mediacrush.conf /etc/nginx/sites-enabled/mediacrush.conf
+ADD maxsize.conf /etc/nginx/conf.d/maxsize.conf
+RUN rm /etc/nginx/sites-enabled/default
+
